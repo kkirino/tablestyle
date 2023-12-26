@@ -1,0 +1,10 @@
+__pycache__/*
+build/*
+dist/*
+*.spec
+bin/*
+include/*
+lib/*
+lib64
+pyvenv.cfg
+test_files/*
