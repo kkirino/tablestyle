@@ -17,7 +17,7 @@ test: dist/tablestyle.exe test.sh
 
 
 release: dist/tablestyle.exe
-	gh release create $(VERSION) 'dist/tablestyle.exe#tablestyle-$(VERSION).exe'
+	gh release create $(VERSION) 'dist/tablestyle.exe#tablestyle.exe'
 
 
 clean:
