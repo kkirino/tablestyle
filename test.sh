@@ -19,8 +19,8 @@ assert() {
         exit 1
     fi
 
-    if [ "$actual_exit_status" = "$expected_exit_status" ] && [ "$actual_errorname" = "$actual_errorname" ]; then
-        echo ".\tablestyle.exe $args => PASS"
+    if [ "$actual_exit_status" = "$expected_exit_status" ] && [ "$actual_errorname" = "$expected_errorname" ]; then
+        echo ".\tablestyle.exe $args => PASS (exit status: $actual_exit_status, error name: $actual_errorname)"
     elif [ "$actual_exit_status" = "$expected_exit_status" ]; then
         echo ".\tablestyle.exe $args => FAIL: $expected_errorname expected as an exit status, but got $actual_errorname"
         exit 1
@@ -55,7 +55,7 @@ assert 1 "" "apply"
 assert 1 "" "apply -n 'My Table' -f config.jsonl -o output.docx input.docx"
 
 # error handled
-assert 1 AttributeError ""
+assert 1 "" ""
 assert 1 FileNotFoundError "apply -f filenotexist.jsonl -o output.docx input.docx"
 assert 1 PackageNotFoundError "get filenotexist.docx"
 assert 1 PackageNotFoundError "apply -o output.docx filenotexist.docx"
@@ -63,12 +63,12 @@ assert 1 PackageNotFoundError "get filenotexist.txt"
 assert 1 PackageNotFoundError "apply -o output.docx formatnotdocx.docx"
 assert 1 PackageNotFoundError "apply -f config.jsonl -o output.docx formatnotdocx.docx"
 assert 1 PackageNotFoundError "apply -n 'My Table' -o output.docx formatnotdocx.docx"
-assert 1 KeyError "apply -o notdocx.doc input.docx"
-assert 1 KeyError "apply -f config.jsonl -o notdocx.doc input.docx"
-assert 1 KeyError "apply -n 'My Table' -o notdocx.doc input.docx"
-assert 1 KeyError "apply -o notdocx input.docx"
-assert 1 KeyError "apply -f config.jsonl -o notdocx input.docx"
-assert 1 KeyError "apply -n 'My Table' -o notdocx input.docx"
+assert 1 ValueError "apply -o notdocx.doc input.docx"
+assert 1 ValueError "apply -f config.jsonl -o notdocx.doc input.docx"
+assert 1 ValueError "apply -n 'My Table' -o notdocx.doc input.docx"
+assert 1 ValueError "apply -o notdocx input.docx"
+assert 1 ValueError "apply -f config.jsonl -o notdocx input.docx"
+assert 1 ValueError "apply -n 'My Table' -o notdocx input.docx"
 assert 1 KeyError "apply -f wrongkey.jsonl -o output.docx input.docx"
 assert 1 KeyError "apply -f stylenotexist.jsonl -o output.docx input.docx"
 assert 1 KeyError "apply -n 'my table' -o output.docx input.docx"
