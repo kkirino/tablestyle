@@ -8,7 +8,7 @@ VERSION=v0.1.0
 
 
 dist/tablestyle.exe: tablestyle.py requirements.txt
-	docker run --rm -v "$(shell pwd)":/src cdrx/pyinstaller-windows:python3 'pyinstaller --onedir --onefile --clean tablestyle.py'
+	docker run --rm -v "$(shell pwd)":/src cdrx/pyinstaller-windows:python3 'pyinstaller --onefile --clean tablestyle.py'
 
 
 .PHONY: test clean

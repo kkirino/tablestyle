@@ -15,7 +15,7 @@ assert() {
     actual_errorname=$(echo "$stdout" | grep -oE '^.+Error')
 
     if [ -n "$actual_errorname" ] && [ $(echo "$stdout" | wc -l) -gt 1 ]; then
-        echo ".\tablestyle.exe $args => FAIL: exception handling not implemented"
+        echo ".\tablestyle.exe $args => FAIL: got $actual_errorname, but exception handling not implemented"
         exit 1
     fi
 
